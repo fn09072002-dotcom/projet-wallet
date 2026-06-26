@@ -1,4 +1,6 @@
 <?php
+require 'services.php';
+
 function afficherMenu() {
     echo "\n** Menu Distributeur **\n";
     echo "1 - Créer Wallet\n";
@@ -8,13 +10,37 @@ function afficherMenu() {
     echo "0 - Quitter\n";
 }
 
-function traiterChoix($choix) {
+function traiterChoix($choix, &$wallets, &$transactions) {
     switch ($choix) {
-        case "1": break;
-        case "2": break;
-        case "3": break;
-        case "4": break;
-        case "0": echo "Au revoir !\n"; break;
-        default: echo "Choix invalide, veuillez réessayer\n";
+        case "1":
+            $client    = readline("Nom du client : ");
+            $telephone = readline("Numéro de téléphone : ");
+            $code      = readline("Code secret : ");
+            $solde     = (float)readline("Solde initial : ");
+            echo creerWallet($wallets, $client, $telephone, $code, $solde) . "\n";
+            break;
+
+        case "2":
+            $telephone = readline("Numéro de téléphone : ");
+            $montant   = (float)readline("Montant : ");
+            echo faireDepot($wallets, $transactions, $telephone, $montant) . "\n";
+            break;
+
+        case "3":
+            $telephone = readline("Numéro de téléphone : ");
+            $montant   = (float)readline("Montant : ");
+            echo faireRetrait($wallets, $transactions, $telephone, $montant) . "\n";
+            break;
+
+        case "4":
+            echo listerTransactions($transactions) . "\n";
+            break;
+
+        case "0":
+            echo "Au revoir !\n";
+            break;
+
+        default:
+            echo "Choix invalide, veuillez réessayer\n";
     }
 }
