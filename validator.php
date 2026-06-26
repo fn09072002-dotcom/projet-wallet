@@ -29,3 +29,6 @@ function validerMontant($montant) {
 function validerSolde($solde) {
     return $solde >= 0;
 }
+function validerSoldeDisponible($solde, $totalDebite) {
+    return $solde >= $totalDebite;
+}
