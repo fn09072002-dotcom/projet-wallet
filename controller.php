@@ -31,11 +31,15 @@ function traiterChoix($choix, &$wallets, &$transactions) {
             $montant   = (float)readline("Montant : ");
             echo faireRetrait($wallets, $transactions, $telephone, $montant) . "\n";
             break;
-
         case "4":
-            echo listerTransactions($transactions) . "\n";
+            $choix = readline("Tous (T) ou numéro spécifique (N) ? ");
+            if (strtoupper($choix) === "N") {
+                $telephone = readline("Numéro de téléphone : ");
+                echo listerTransactions($transactions, $telephone) . "\n";
+            } else {
+                echo listerTransactions($transactions) . "\n";
+            }
             break;
-
         case "0":
             echo "Au revoir !\n";
             break;

@@ -91,7 +91,8 @@ function faireRetrait(&$wallets, &$transactions, $telephone, $montant) {
     $totalDebite = $montant + $frais;
 
     // Vérifier solde suffisant
-    if ($wallets[$index][3] < $totalDebite) {
+   
+    if (!validerSoldeDisponible($wallets[$index][3], $totalDebite)) {
         return "Solde insuffisant !\nSolde actuel : {$wallets[$index][3]} CFA\nTotal à débiter : {$totalDebite} CFA";
     }
 
@@ -103,14 +104,17 @@ function faireRetrait(&$wallets, &$transactions, $telephone, $montant) {
 
     return "Retrait de {$montant} CFA effectué !\nFrais : {$frais} CFA\nTotal débité : {$totalDebite} CFA\nNouveau solde : {$wallets[$index][3]} CFA";
 }
-
-function listerTransactions($transactions) {
+function listerTransactions($transactions, $telephone = null) {
     if (empty($transactions)) {
         return "Aucune transaction enregistrée !";
     }
 
     $affichage = "\n=== Historique des Transactions ===\n";
     foreach ($transactions as $i => $transaction) {
+        // Si téléphone spécifié, filtrer
+        if ($telephone !== null && $transaction[1] !== $telephone) {
+            continue;
+        }
         $affichage .= "\n-- Transaction " . ($i + 1) . " --\n";
         $affichage .= "Type      : {$transaction[0]}\n";
         $affichage .= "Téléphone : {$transaction[1]}\n";
