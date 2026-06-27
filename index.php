@@ -1,5 +1,7 @@
 <?php
 require 'controller.php';
+use function Wallet\Controller\afficherMenu;
+use function Wallet\Controller\traiterChoix;
 
 do {
     afficherMenu();

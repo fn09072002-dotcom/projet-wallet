@@ -1,6 +1,13 @@
 <?php
 require 'services.php';
 
+namespace Wallet\Controller;
+
+use function Wallet\Services\creerWallet;
+use function Wallet\Services\faireDepot;
+use function Wallet\Services\faireRetrait;
+use function Wallet\Services\listerTransactions;
+
 function afficherMenu() {
     echo "\n** Menu Distributeur **\n";
     echo "1 - Créer Wallet\n";

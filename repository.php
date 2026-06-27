@@ -1,5 +1,5 @@
 <?php
-
+namespace Wallet\Validator;
 $wallets = [];
 $transactions = [];
 

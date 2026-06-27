@@ -1,4 +1,5 @@
 <?php
+namespace Wallet\Validator;
 
 function validerLongueur($valeur, $longueur) {
     return strlen($valeur) === $longueur;

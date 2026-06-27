@@ -1,6 +1,19 @@
 <?php
 require 'validator.php';
-require 'repository.php';
+require 'repository.php'
+
+namespace Wallet\Services;
+
+use function Wallet\Validator\validerLongueur;
+use function Wallet\Validator\validerPrefixe;
+use function Wallet\Validator\validerUnicite;
+use function Wallet\Validator\validerMontant;
+use function Wallet\Validator\validerSolde;
+use function Wallet\Validator\validerSoldeDisponible;
+use function Wallet\Repository\ajouterWallet;
+use function Wallet\Repository\trouverWallet;
+use function Wallet\Repository\mettreAJourSolde;
+use function Wallet\Repository\ajouterTransaction;;
 
 function creerWallet(&$wallets, $client, $telephone, $code, $solde) {
     
