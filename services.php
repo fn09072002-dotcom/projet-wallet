@@ -1,8 +1,8 @@
 <?php
-require 'validator.php';
-require 'repository.php'
-
 namespace Wallet\Services;
+
+require 'validator.php';
+require 'repository.php';
 
 use function Wallet\Validator\validerLongueur;
 use function Wallet\Validator\validerPrefixe;
@@ -13,7 +13,7 @@ use function Wallet\Validator\validerSoldeDisponible;
 use function Wallet\Repository\ajouterWallet;
 use function Wallet\Repository\trouverWallet;
 use function Wallet\Repository\mettreAJourSolde;
-use function Wallet\Repository\ajouterTransaction;;
+use function Wallet\Repository\ajouterTransaction;
 
 function creerWallet(&$wallets, $client, $telephone, $code, $solde) {
     
@@ -27,7 +27,7 @@ function creerWallet(&$wallets, $client, $telephone, $code, $solde) {
         return "Le téléphone doit avoir exactement 9 chiffres !";
     }
 
-    // Vérifier préfixe
+    
     if (!validerPrefixe($telephone)) {
         return "Format téléphone invalide !";
     }

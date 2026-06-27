@@ -1,7 +1,8 @@
 <?php
+namespace Wallet\Controller;
 require 'services.php';
 
-namespace Wallet\Controller;
+
 
 use function Wallet\Services\creerWallet;
 use function Wallet\Services\faireDepot;
