@@ -7,19 +7,14 @@ function validerLongueur($valeur, $longueur) {
 
 function validerPrefixe($telephone) {
     $prefixes = ["77", "78", "76", "70", "75"];
-    foreach ($prefixes as $prefix) {
-        if (substr($telephone, 0, 2) === $prefix) {
-            return true;
-        }
-    }
-    return false;
+    return in_array(substr($telephone, 0, 2), $prefixes);
 }
 
 function validerUnicite(&$wallets, $telephone, $code) {
-    foreach ($wallets as $wallet) {
-        if ($wallet[1] === $telephone) return 2;
-        if ($wallet[2] === $code) return 3;
-    }
+    $telephones = array_column($wallets, 1);
+    $codes = array_column($wallets, 2);
+    if (array_search($telephone, $telephones) !== false) return 2;
+    if (array_search($code, $codes) !== false) return 3;
     return -1;
 }
 
@@ -30,6 +25,7 @@ function validerMontant($montant) {
 function validerSolde($solde) {
     return $solde >= 0;
 }
+
 function validerSoldeDisponible($solde, $totalDebite) {
     return $solde >= $totalDebite;
 }
