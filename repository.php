@@ -1,19 +1,15 @@
 <?php
-
 $wallets = [];
 $transactions = [];
 
 function ajouterWallet(&$wallets, $wallet) {
-    $wallets[] = $wallet;
+    array_push($wallets, $wallet);
 }
 
 function trouverWallet(&$wallets, $telephone) {
-    foreach ($wallets as $index => $wallet) {
-        if ($wallet[1] === $telephone) {
-            return $index;
-        }
-    }
-    return -1;
+    $telephones = array_column($wallets, 1);
+    $index = array_search($telephone, $telephones);
+    return $index !== false ? $index : -1;
 }
 
 function mettreAJourSolde(&$wallets, $index, $montant) {
@@ -21,9 +17,5 @@ function mettreAJourSolde(&$wallets, $index, $montant) {
 }
 
 function ajouterTransaction(&$transactions, $transaction) {
-    $transactions[] = $transaction;
-}
-
-function getTransactions($transactions) {
-    return $transactions;
+    array_push($transactions, $transaction);
 }
